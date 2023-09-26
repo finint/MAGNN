@@ -1,0 +1,9 @@
+
+pandas==0.25.3
+numpy==1.16.0
+pytest==4.1.1
+tensorflow==1.15.0
+pandas==0.25.3
+numpy==1.16.0
+bert_serving_client==1.10.0
+bert_serving_server==1.10.0
