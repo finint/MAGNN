@@ -1,9 +1,9 @@
 import os
 import sys
 sys.path.append('.')
-from dataset.constant import TEST_QUARTERS
-from dataset.magnn_dataset import MAGNN_Dataset
-from dataset.data_prepare import get_event_news_embedding_merge_data
+from prepossessing.constant import TEST_QUARTERS
+from prepossessing.magnn_dataset import MAGNN_Dataset
+from prepossessing.data_prepare import get_event_news_embedding_merge_data
 
 from tools.tools import *
 

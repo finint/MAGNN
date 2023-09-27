@@ -7,7 +7,7 @@ import numpy as np
 import sys
 sys.path.append('.')
 
-from dataset.company_relation import get_company_relation
+from prepossessing.company_relation import get_company_relation
 
 from operator import itemgetter
 
@@ -313,15 +313,15 @@ def get_price_embedding_merge(kdcode, dt, price_df, self_price_embedding):
 # load existed price embedding results
 def get_price_embedding_df(period_tuple):
     dts = np.load(os.path.join(PRICE_NUMPY_DIR, '-'.join(period_tuple) + '-dts-test.npy'), allow_pickle=True)
-    kdcodes = np.load(os.path.join(PRICE_NUMPY_DIR, '-'.join(period_tuple) + '-kdcodes-test.npy'))
-    labels = np.load(os.path.join(PRICE_NUMPY_DIR, '-'.join(period_tuple) + '-labels-test.npy'))
+    kdcodes = np.load(os.path.join(PRICE_NUMPY_DIR, '-'.join(period_tuple) + '-kdcodes-test.npy'), allow_pickle=True)
+    labels = np.load(os.path.join(PRICE_NUMPY_DIR, '-'.join(period_tuple) + '-labels-test.npy'), allow_pickle=True)
     df = pd.DataFrame({'dt': dts, 'kdcode': kdcodes, 'label': labels})
     pred_label = np.load(
-        os.path.join(PRICE_EMBEDDING_DIR, '-'.join(period_tuple) + '-lstm_model_label-test.npy'))
+        os.path.join(PRICE_EMBEDDING_DIR, '-'.join(period_tuple) + '-lstm_model_label-test.npy'), allow_pickle=True)
     pred_probability = np.load(
-        os.path.join(PRICE_EMBEDDING_DIR, '-'.join(period_tuple) + '-lstm_model_probability-test.npy'))
+        os.path.join(PRICE_EMBEDDING_DIR, '-'.join(period_tuple) + '-lstm_model_probability-test.npy'), allow_pickle=True)
     price_embedding = np.load(
-        os.path.join(PRICE_EMBEDDING_DIR, '-'.join(period_tuple) + '-lstm_model_embedding-test.npy'))
+        os.path.join(PRICE_EMBEDDING_DIR, '-'.join(period_tuple) + '-lstm_model_embedding-test.npy'), allow_pickle=True)
     df['price_embedding'] = price_embedding.tolist()
     df['pred_label'] = pred_label
     df['pred_probability'] = pred_probability.tolist()
@@ -346,7 +346,7 @@ def get_magnn_result(period_tuple):
         PRICE_EMBEDDING_LENGTH=PRICE_EMBEDDING_LENGTH,
         MIDDLE_ALPHA_LENGTH=MIDDLE_ALPHA_LENGTH,
         FINAL_WEIGHT_LENGTH=FINAL_WEIGHT_LENGTH,
-        FINAL_ALPHA_LENGTH=FINAL_ALPHA_LENGTH)))
+        FINAL_ALPHA_LENGTH=FINAL_ALPHA_LENGTH)), allow_pickle=True)
     probability_np = np.load(os.path.join(result_path, '-'.join(
         period_tuple) + '-magnn_probability-test-{lr}-{PRICE_EMBEDDING_LENGTH}-{MIDDLE_ALPHA_LENGTH}-{FINAL_WEIGHT_LENGTH}-{FINAL_ALPHA_LENGTH}.npy'.format(
         model_name=model_name,
@@ -355,7 +355,7 @@ def get_magnn_result(period_tuple):
         MIDDLE_ALPHA_LENGTH=MIDDLE_ALPHA_LENGTH,
         FINAL_WEIGHT_LENGTH=FINAL_WEIGHT_LENGTH,
         FINAL_ALPHA_LENGTH=FINAL_ALPHA_LENGTH
-    )))
+    )), allow_pickle=True)
     event_alpha = np.load(os.path.join(result_path, '-'.join(
         period_tuple) + '-magnn_event_alpha-test-{lr}-{PRICE_EMBEDDING_LENGTH}-{MIDDLE_ALPHA_LENGTH}-{FINAL_WEIGHT_LENGTH}-{FINAL_ALPHA_LENGTH}.npy'.format(
         model_name=model_name,
@@ -363,7 +363,7 @@ def get_magnn_result(period_tuple):
         PRICE_EMBEDDING_LENGTH=PRICE_EMBEDDING_LENGTH,
         MIDDLE_ALPHA_LENGTH=MIDDLE_ALPHA_LENGTH,
         FINAL_WEIGHT_LENGTH=FINAL_WEIGHT_LENGTH,
-        FINAL_ALPHA_LENGTH=FINAL_ALPHA_LENGTH)))
+        FINAL_ALPHA_LENGTH=FINAL_ALPHA_LENGTH)), allow_pickle=True)
     news_alpha = np.load(os.path.join(result_path, '-'.join(
         period_tuple) + '-magnn_news_alpha-test-{lr}-{PRICE_EMBEDDING_LENGTH}-{MIDDLE_ALPHA_LENGTH}-{FINAL_WEIGHT_LENGTH}-{FINAL_ALPHA_LENGTH}.npy'.format(
         model_name=model_name,
@@ -371,7 +371,7 @@ def get_magnn_result(period_tuple):
         PRICE_EMBEDDING_LENGTH=PRICE_EMBEDDING_LENGTH,
         MIDDLE_ALPHA_LENGTH=MIDDLE_ALPHA_LENGTH,
         FINAL_WEIGHT_LENGTH=FINAL_WEIGHT_LENGTH,
-        FINAL_ALPHA_LENGTH=FINAL_ALPHA_LENGTH)))
+        FINAL_ALPHA_LENGTH=FINAL_ALPHA_LENGTH)), allow_pickle=True)
     final_alpha = np.load(os.path.join(result_path, '-'.join(
         period_tuple) + '-magnn_final_alpha-test-{lr}-{PRICE_EMBEDDING_LENGTH}-{MIDDLE_ALPHA_LENGTH}-{FINAL_WEIGHT_LENGTH}-{FINAL_ALPHA_LENGTH}.npy'.format(
         model_name=model_name,
@@ -379,7 +379,7 @@ def get_magnn_result(period_tuple):
         PRICE_EMBEDDING_LENGTH=PRICE_EMBEDDING_LENGTH,
         MIDDLE_ALPHA_LENGTH=MIDDLE_ALPHA_LENGTH,
         FINAL_WEIGHT_LENGTH=FINAL_WEIGHT_LENGTH,
-        FINAL_ALPHA_LENGTH=FINAL_ALPHA_LENGTH)))
+        FINAL_ALPHA_LENGTH=FINAL_ALPHA_LENGTH)), allow_pickle=True)
     ori_data.rename(columns={'pred_label':'ori_pred_label'},inplace=True)
     final_alpha_df = pd.DataFrame(final_alpha, columns=['event_att', 'news_att', 'price_att'])
     probability = pd.DataFrame(probability_np, columns=['up', 'down', 'neural'])

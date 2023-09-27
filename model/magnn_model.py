@@ -5,13 +5,13 @@ import sys
 sys.path.append('.')
 import tensorflow.compat.v1 as tf
 tf.disable_v2_behavior()
-from dataset.constant import TEST_QUARTERS,ALL_QUARTER
+from prepossessing.constant import TEST_QUARTERS,ALL_QUARTER
 
 from model.price_lstm_embedding import get_price_embedding_df
-from dataset.event_news_embedding import get_event_news_embedding_df
-from dataset.company_relation import get_company_relation
-from dataset.magnn_dataset import MAGNN_Dataset
-from dataset.data_prepare import get_all_embedding_merge_data
+from prepossessing.event_news_embedding import get_event_news_embedding_df
+from prepossessing.company_relation import get_company_relation
+from prepossessing.magnn_dataset import MAGNN_Dataset
+from prepossessing.data_prepare import get_all_embedding_merge_data
 
 import time
 

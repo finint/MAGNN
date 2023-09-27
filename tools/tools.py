@@ -82,7 +82,7 @@ def get_cur_stocklist(dt):
     dt=pd.to_datetime(dt)
     strdt=datetime.strftime(dt,'%Y-%m-%d')
     filepath=strdt+'.pkl'
-    df=np.load(os.path.join(ORI_PRICE_DIR,filepath))
+    df=np.load(os.path.join(ORI_PRICE_DIR,filepath),allow_pickle=True)
     stocklist=df['kdcode'].unique()    
     return stocklist    
 

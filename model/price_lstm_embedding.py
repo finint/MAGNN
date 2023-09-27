@@ -7,9 +7,9 @@ import tensorflow as tf
 import sys
 sys.path.append('.')
 
-from dataset.constant import TEST_QUARTERS
-from dataset.magnn_dataset import MAGNN_Dataset
-from dataset.data_prepare import get_price_segment
+from prepossessing.constant import TEST_QUARTERS
+from prepossessing.magnn_dataset import MAGNN_Dataset
+from prepossessing.data_prepare import get_price_segment
 from tools.tools import *
 
 from datetime import datetime
@@ -118,20 +118,20 @@ def get_features_and_labels(data_df, start_dt, end_dt):
 
 
 def get_train_test_data(train_period_tuple, test_period_tuple):
-    if os.path.exists(os.path.join(PRICE_NUMPY_DIR, '-'.join(train_period_tuple) + '-price_features-train.npy')) \
+    if os.path.exists(os.path.join(PRICE_NUMPY_DIR, '-'.join(train_period_tuple) + '-price_features-train.npy'), allow_pickle=True) \
             and os.path.exists(os.path.join(PRICE_NUMPY_DIR, '-'.join(test_period_tuple) + '-price_features-test.npy')):
         train_period_features = np.load(
-            os.path.join(PRICE_NUMPY_DIR, '-'.join(train_period_tuple) + '-price_features-train.npy'))
-        train_period_labels = np.load(os.path.join(PRICE_NUMPY_DIR, '-'.join(train_period_tuple) + '-labels-train.npy'))
+            os.path.join(PRICE_NUMPY_DIR, '-'.join(train_period_tuple) + '-price_features-train.npy'), allow_pickle=True)
+        train_period_labels = np.load(os.path.join(PRICE_NUMPY_DIR, '-'.join(train_period_tuple) + '-labels-train.npy'), allow_pickle=True)
         train_period_dts = np.load(os.path.join(PRICE_NUMPY_DIR, '-'.join(train_period_tuple) + '-dts-train.npy'), allow_pickle=True)
         train_period_kdcodes = np.load(
-            os.path.join(PRICE_NUMPY_DIR, '-'.join(train_period_tuple) + '-kdcodes-train.npy'))
+            os.path.join(PRICE_NUMPY_DIR, '-'.join(train_period_tuple) + '-kdcodes-train.npy'), allow_pickle=True)
 
         test_period_features = np.load(
-            os.path.join(PRICE_NUMPY_DIR, '-'.join(test_period_tuple) + '-price_features-test.npy'))
-        test_period_labels = np.load(os.path.join(PRICE_NUMPY_DIR, '-'.join(test_period_tuple) + '-labels-test.npy'))
+            os.path.join(PRICE_NUMPY_DIR, '-'.join(test_period_tuple) + '-price_features-test.npy'), allow_pickle=True)
+        test_period_labels = np.load(os.path.join(PRICE_NUMPY_DIR, '-'.join(test_period_tuple) + '-labels-test.npy'), allow_pickle=True)
         test_period_dts = np.load(os.path.join(PRICE_NUMPY_DIR, '-'.join(test_period_tuple) + '-dts-test.npy'), allow_pickle=True)
-        test_period_kdcodes = np.load(os.path.join(PRICE_NUMPY_DIR, '-'.join(test_period_tuple) + '-kdcodes-test.npy'))
+        test_period_kdcodes = np.load(os.path.join(PRICE_NUMPY_DIR, '-'.join(test_period_tuple) + '-kdcodes-test.npy'), allow_pickle=True)
         return train_period_features, \
                train_period_labels, \
                train_period_dts, \
@@ -424,11 +424,11 @@ def train_price_embedding(train_period_tuple, test_period_tuple):
 
 
 def get_price_embedding_df(period_tuple):
-    dts = np.load(os.path.join(PRICE_NUMPY_DIR, '-'.join(period_tuple) + '-dts-test.npy'))
-    kdcodes = np.load(os.path.join(PRICE_NUMPY_DIR, '-'.join(period_tuple) + '-kdcodes-test.npy'))
-    labels = np.load(os.path.join(PRICE_NUMPY_DIR, '-'.join(period_tuple) + '-labels-test.npy'))
+    dts = np.load(os.path.join(PRICE_NUMPY_DIR, '-'.join(period_tuple) + '-dts-test.npy'), allow_pickle=True)
+    kdcodes = np.load(os.path.join(PRICE_NUMPY_DIR, '-'.join(period_tuple) + '-kdcodes-test.npy'), allow_pickle=True)
+    labels = np.load(os.path.join(PRICE_NUMPY_DIR, '-'.join(period_tuple) + '-labels-test.npy'), allow_pickle=True)
     df = pd.DataFrame({'dt': dts, 'kdcode': kdcodes, 'label': labels})
-    return_embedding = np.load(os.path.join(PRICE_NUMPY_DIR, '-'.join(period_tuple) + '-lstm_model_embedding-test.npy'))
+    return_embedding = np.load(os.path.join(PRICE_NUMPY_DIR, '-'.join(period_tuple) + '-lstm_model_embedding-test.npy', allow_pickle=True))
     df['price_embedding'] = return_embedding.tolist()
     return df
 
