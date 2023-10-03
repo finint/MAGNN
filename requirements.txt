@@ -1,9 +1,7 @@
 pandas==0.25.3
-numpy==1.16.0
+numpy==1.16.4
 pytest==4.1.1
-tensorflow==1.15.0
-pandas==0.25.3
-numpy==1.16.0
+tensorflow==1.15.2
 bert_serving_client==1.10.0
 bert_serving_server==1.10.0
 embedding-as-service==3.1.2

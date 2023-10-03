@@ -32,8 +32,7 @@ stock_list=get_cur_stocklist('2019-04-01')#example
 company_relation = get_company_relation()
 company_relation = company_relation.dropna()
 
-MAGNN_RESULT = './data/magnn-result'
-MAGNN_LOG_PATH = './magnn/data/magnn-log'
+MAGNN_RESULT = './dataset/magnn-result'
 
 """get relationship embeddings by relation, which seems not used in magnn process
         Args:
@@ -770,18 +769,18 @@ def train_magnn_embedding(train_period_tuples, test_period_tuple, timestamp):
             news_alphas.append(news_alpha.reshape(-1))
             final_alphas.append(final_alpha.reshape(-1))
                                 
-        if not os.path.exists(os.path.join(result_path, timestamp)):
-            os.mkdir(os.path.join(result_path, timestamp))
+        # if not os.path.exists(os.path.join(result_path, timestamp)):
+        #     os.mkdir(os.path.join(result_path, timestamp))
             
         # save results for magnn
-        np.save(os.path.join(result_path, timestamp, '-'.join(
+        np.save(os.path.join(result_path, '-'.join(
             test_period_tuple) + '-magnn_label-test-{lr}-{PRICE_EMBEDDING_LENGTH}-{MIDDLE_ALPHA_LENGTH}-{FINAL_WEIGHT_LENGTH}-{FINAL_ALPHA_LENGTH}'.format(
             lr=lr,
             PRICE_EMBEDDING_LENGTH=PRICE_EMBEDDING_LENGTH,
             MIDDLE_ALPHA_LENGTH=MIDDLE_ALPHA_LENGTH,
             FINAL_WEIGHT_LENGTH=FINAL_WEIGHT_LENGTH,
             FINAL_ALPHA_LENGTH=FINAL_ALPHA_LENGTH)), np.array(labels).reshape([-1, 1]))
-        np.save(os.path.join(result_path, timestamp, '-'.join(
+        np.save(os.path.join(result_path, '-'.join(
             test_period_tuple) + '-magnn_probability-test-{lr}-{PRICE_EMBEDDING_LENGTH}-{MIDDLE_ALPHA_LENGTH}-{FINAL_WEIGHT_LENGTH}-{FINAL_ALPHA_LENGTH}'.format(
             lr=lr,
             PRICE_EMBEDDING_LENGTH=PRICE_EMBEDDING_LENGTH,
@@ -790,21 +789,21 @@ def train_magnn_embedding(train_period_tuples, test_period_tuple, timestamp):
             FINAL_ALPHA_LENGTH=FINAL_ALPHA_LENGTH
         )), np.array(probabilities))
         
-        np.save(os.path.join(result_path, timestamp, '-'.join(
+        np.save(os.path.join(result_path, '-'.join(
             test_period_tuple) + '-magnn_event_alpha-test-{lr}-{PRICE_EMBEDDING_LENGTH}-{MIDDLE_ALPHA_LENGTH}-{FINAL_WEIGHT_LENGTH}-{FINAL_ALPHA_LENGTH}'.format(
             lr=lr,
             PRICE_EMBEDDING_LENGTH=PRICE_EMBEDDING_LENGTH,
             MIDDLE_ALPHA_LENGTH=MIDDLE_ALPHA_LENGTH,
             FINAL_WEIGHT_LENGTH=FINAL_WEIGHT_LENGTH,
             FINAL_ALPHA_LENGTH=FINAL_ALPHA_LENGTH)), np.array(events_alphas))
-        np.save(os.path.join(result_path, timestamp, '-'.join(
+        np.save(os.path.join(result_path, '-'.join(
             test_period_tuple) + '-magnn_news_alpha-test-{lr}-{PRICE_EMBEDDING_LENGTH}-{MIDDLE_ALPHA_LENGTH}-{FINAL_WEIGHT_LENGTH}-{FINAL_ALPHA_LENGTH}'.format(
             lr=lr,
             PRICE_EMBEDDING_LENGTH=PRICE_EMBEDDING_LENGTH,
             MIDDLE_ALPHA_LENGTH=MIDDLE_ALPHA_LENGTH,
             FINAL_WEIGHT_LENGTH=FINAL_WEIGHT_LENGTH,
             FINAL_ALPHA_LENGTH=FINAL_ALPHA_LENGTH)), np.array(news_alphas))
-        np.save(os.path.join(result_path, timestamp, '-'.join(
+        np.save(os.path.join(result_path, '-'.join(
             test_period_tuple) + '-magnn_final_alpha-test-{lr}-{PRICE_EMBEDDING_LENGTH}-{MIDDLE_ALPHA_LENGTH}-{FINAL_WEIGHT_LENGTH}-{FINAL_ALPHA_LENGTH}'.format(
             lr=lr,
             PRICE_EMBEDDING_LENGTH=PRICE_EMBEDDING_LENGTH,

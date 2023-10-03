@@ -8,18 +8,18 @@ import os
 # please change these relative path to path
 parent_dir=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # global constants
-ORI_PRICE_DIR = os.path.join(parent_dir,'data/price')
-EVENT_DIR = os.path.join(parent_dir,'data/event')
-NEWS_DIR = os.path.join(parent_dir,'data/news')
-PRICE_SEGMENT_DIR = os.path.join(parent_dir,'data/price-segment')
-EVENT_EMBEDDING_SEGMENT_DIR = os.path.join(parent_dir,'data/event-embedding-segment')
-NEWS_EMBEDDING_SEGMENT_DIR = os.path.join(parent_dir,'data/news-embedding-segment')
-EVENT_NEWS_EMBEDDING_MERGE_DIR = os.path.join(parent_dir,'data/event-news-embedding-merge')
-PRICE_EMBEDDING_MERGE_DIR = os.path.join(parent_dir,'data/price-embedding-merge')
-PRICE_NUMPY_DIR = os.path.join(parent_dir,'data/price-numpy')
-PRICE_EMBEDDING_DIR = os.path.join(parent_dir,'data/price-embedding')
-EVENT_NEWS_RESULT = os.path.join(parent_dir,'data/event-news-result')
-PRICE_GAT_RESULT = os.path.join(parent_dir,'data/price-gat-result')
+ORI_PRICE_DIR = os.path.join(parent_dir,'dataset/price')
+EVENT_DIR = os.path.join(parent_dir,'dataset/event')
+NEWS_DIR = os.path.join(parent_dir,'dataset/news')
+PRICE_SEGMENT_DIR = os.path.join(parent_dir,'dataset/price-segment')
+EVENT_EMBEDDING_SEGMENT_DIR = os.path.join(parent_dir,'dataset/event-embedding-segment')
+NEWS_EMBEDDING_SEGMENT_DIR = os.path.join(parent_dir,'dataset/news-embedding-segment')
+EVENT_NEWS_EMBEDDING_MERGE_DIR = os.path.join(parent_dir,'dataset/event-news-embedding-merge')
+PRICE_EMBEDDING_MERGE_DIR = os.path.join(parent_dir,'dataset/price-embedding-merge')
+PRICE_NUMPY_DIR = os.path.join(parent_dir,'dataset/price-numpy')
+PRICE_EMBEDDING_DIR = os.path.join(parent_dir,'dataset/price-embedding')
+EVENT_NEWS_RESULT = os.path.join(parent_dir,'dataset/event-news-result')
+PRICE_GAT_RESULT = os.path.join(parent_dir,'dataset/price-gat-result')
 
 ONE_DAY_HIGH_RETURN = 'one_day_high_return'
 ONE_DAY_OPEN_RETURN = 'one_day_open_return'

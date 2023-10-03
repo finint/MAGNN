@@ -1,9 +1,9 @@
 from model.magnn_model import train_magnn_embedding
 from model.price_lstm_embedding import train_price_embedding
-from dataset.data_prepare import init_event_news_embeeding_df,get_magnn_result
+from prepossessing.data_prepare import init_event_news_embeeding_df,get_magnn_result
 
 
-from dataset.constant import TEST_QUARTERS
+from prepossessing.constant import TEST_QUARTERS
 import time
 
 
@@ -32,6 +32,8 @@ def main():
         """reselts"""
         df=get_magnn_result(TEST_QUARTERS[0])
         df.to_csv('magnn_result.csv')
+        
+        print("magnn result has been saved to \'magnn_result.csv\' ")
 
 if __name__=='__main__':
     main()

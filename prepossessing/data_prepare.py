@@ -329,7 +329,7 @@ def get_price_embedding_df(period_tuple):
 
 #get magnn result
 def get_magnn_result(period_tuple):
-    result_path = r'./data\magnn-result\202309261630'
+    result_path = r'./dataset/magnn-result/'
     model_name = 'magnn_model'
     lr = 0.005
     PRICE_EMBEDDING_LENGTH = 64

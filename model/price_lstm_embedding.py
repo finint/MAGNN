@@ -33,10 +33,8 @@ MEDIUM_LABLE = 2
 FEATURE_NUM = 4
 LABEL_NUM = 3
 
-PRICE_NUMPY_DIR = './data/price-numpy'
-PRICE_EMBEDDING_DIR = './data/price-embedding'
-
-PRICE_EMBEDDING_LOG_PATH = '../data/price-embedding-log'
+PRICE_NUMPY_DIR = './dataset/price-numpy'
+PRICE_EMBEDDING_DIR = './dataset/price-embedding'
 
 
 # MAD:中位数去极值
@@ -118,7 +116,7 @@ def get_features_and_labels(data_df, start_dt, end_dt):
 
 
 def get_train_test_data(train_period_tuple, test_period_tuple):
-    if os.path.exists(os.path.join(PRICE_NUMPY_DIR, '-'.join(train_period_tuple) + '-price_features-train.npy'), allow_pickle=True) \
+    if os.path.exists(os.path.join(PRICE_NUMPY_DIR, '-'.join(train_period_tuple) + '-price_features-train.npy')) \
             and os.path.exists(os.path.join(PRICE_NUMPY_DIR, '-'.join(test_period_tuple) + '-price_features-test.npy')):
         train_period_features = np.load(
             os.path.join(PRICE_NUMPY_DIR, '-'.join(train_period_tuple) + '-price_features-train.npy'), allow_pickle=True)
@@ -204,9 +202,7 @@ def train_price_embedding(train_period_tuple, test_period_tuple):
     one_hot_train_quarter_labels[np.arange(train_quarter_labels.size), train_quarter_labels] = 1
     one_hot_train_quarter_labels = one_hot_train_quarter_labels.astype(int)
     train_dataset_array = np.concatenate([train_quarter_price_features, one_hot_train_quarter_labels], axis=1)
-    
-    np.save('array',train_dataset_array)
-    
+        
     batch_size = int(train_quarter_price_features.shape[0])
     batch_count = int(train_quarter_price_features.shape[0] / batch_size)
 
