@@ -52,13 +52,13 @@ Financial time series forecasting with multi-modality graph neural network
 * If you find **MAGNN** is useful for your research, please consider citing the following papers:
 
     ``` latex
-    @inproceedings{han2023efficient,
-        title={Financial time series forecasting with multi-modality graph neural network},
-        author={Dawei Cheng, Fangzhou Yang, Sheng Xiang, Jin Liu},
-        booktitle={Pattern Recognition},
-        year={2022},
-        paper website={https://www.sciencedirect.com/science/article/abs/pii/S003132032100399X},
-      }
-
-
+	@article{cheng2022financial,
+	  title={Financial time series forecasting with multi-modality graph neural network},
+	  author={Cheng, Dawei and Yang, Fangzhou and Xiang, Sheng and Liu, Jin},
+	  journal={Pattern Recognition},
+	  volume={121},
+	  pages={108218},
+	  year={2022},
+	  publisher={Elsevier}
+	}
 
